@@ -87,8 +87,8 @@ public class Machine {
     public void setCompletionTime() {
         ListIterator iterator = jobList.iterator();
         int accCompletionTime = 0;
-        while (iterator.hasNext()) {
-            iterator.current.job.completionTime = accCompletionTime + iterator.current.job.getProcessingTime();
+        while (iterator.current!=null) {
+            iterator.current.job.setCompletionTime();
             iterator.next();
         }
     }

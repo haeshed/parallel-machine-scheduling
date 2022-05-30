@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="bug List.removefirst, fix BRJ, fix run round,">
+    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="job, list, ListIterator fixes, added setCP in machine,">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/Job.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/List.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ListIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/ListIterator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Machine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Job.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Job.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/ListIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/ListIterator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Machine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Machine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +61,9 @@
       <option name="presentableId" value="Default" />
       <updated>1653890579436</updated>
       <workItem from="1653890584867" duration="3441000" />
+      <workItem from="1653912213419" duration="2142000" />
+      <workItem from="1653927873642" duration="4000" />
+      <workItem from="1653942452311" duration="1358000" />
     </task>
     <task id="LOCAL-00001" summary="able to run">
       <created>1653890708466</created>
@@ -112,7 +107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653902234614</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="job, list, ListIterator fixes, added setCP in machine,">
+      <created>1653906821088</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1653906821088</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,7 +138,8 @@
     <MESSAGE value="added best response job" />
     <MESSAGE value="added runRound, build const sim" />
     <MESSAGE value="bug List.removefirst, fix BRJ, fix run round," />
-    <option name="LAST_COMMIT_MESSAGE" value="bug List.removefirst, fix BRJ, fix run round," />
+    <MESSAGE value="job, list, ListIterator fixes, added setCP in machine," />
+    <option name="LAST_COMMIT_MESSAGE" value="job, list, ListIterator fixes, added setCP in machine," />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -61,9 +61,10 @@ public class Simulator {
             this.move(job, machine);
             System.out.println(bestCompTime + " <best | cur> " + job.completionTime);
             System.out.println(toMachine.ID + " <bestM | curM> " + job.runningMachine.ID);
+//            System.out.println(job.runningMachine.toString());
             if (job.completionTime < bestCompTime) {
-                System.out.println("entered");
-                System.out.println(job.completionTime + " <time | mach> " + job.runningMachine.ID);
+                System.out.println("-----switched best to mach "+ job.runningMachine.ID +" time "+ job.completionTime);
+//                System.out.println(job.completionTime + " <time | mach> " + job.runningMachine.ID);
                 bestCompTime = job.completionTime;
                 toMachine = job.runningMachine;
             }
@@ -71,7 +72,7 @@ public class Simulator {
         job.runningMachine.remove(job);
         fromMachine.jobList.add(startIndex, job);
         job.setRunningMachine(fromMachine);
-        fromMachine.setCompletionTime();
+        this.setCompletionTime();
         return toMachine;
     }
 
@@ -82,9 +83,9 @@ public class Simulator {
             Machine bestMachine = this.bestResponseJob(iterator.current.job);
             if (curMachine != bestMachine) {
                 this.move(iterator.current.job, bestMachine);
-                System.out.println("finished BRJ, moved to: " + iterator.current.job.completionTime + " <time | mach> " + iterator.current.job.runningMachine.ID);
+                System.out.println("finished BRJ, moved to: " + iterator.current.job.runningMachine.ID + " <mach | time> " + iterator.current.job.completionTime);
             } else
-                System.out.println("finished BRJ, stayed at: " + iterator.current.job.completionTime + " <time | mach> " + iterator.current.job.runningMachine.ID);
+                System.out.println("finished BRJ, stayed at: " + iterator.current.job.runningMachine.ID + " <mach | time> " + iterator.current.job.completionTime);
             System.out.println();
             System.out.println(this.toString());
             iterator.next();
@@ -123,6 +124,12 @@ public class Simulator {
             int MachineID = (int) (Math.random() * numMachines);
             Job newJob = new Job(i, processingTime, this.machines[MachineID]);
             this.allJobs.addLast(newJob);
+        }
+    }
+
+    public void setCompletionTime(){
+        for (Machine machine : machines) {
+            machine.setCompletionTime();
         }
     }
 

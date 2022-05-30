@@ -63,4 +63,8 @@ public class Job {
     public String toString2() {
         return String.format("%1$22s", "{ Job " + this.ID + " PT: " + processingTime + " CT " + completionTime + " }");
     }
+
+    public String toString3() {
+        return String.format("%1$" + 10 + processingTime / 2 + "s", "{ Job " + this.ID + " PT: " + processingTime + " CT " + completionTime + " }");
+    }
 }
