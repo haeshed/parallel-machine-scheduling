@@ -7,7 +7,7 @@ public class Simulator {
      * machines).
      */
     Machine[] machines;
-    List chronoList;
+    List allJobs;
     int round;
 
     public Simulator(int machineNum, int round) {
@@ -16,7 +16,16 @@ public class Simulator {
             machines[i] = new Machine(i, 0);
         }
         this.round = round;
-        this.chronoList = new List();
+        this.allJobs = new List();
+    }
+
+    public Simulator() {
+        this.machines = new Machine[5];
+        for (int i = 0; i < 5; i++) {
+            machines[i] = new Machine(i, 0);
+        }
+        this.round = 10;
+        this.allJobs = new List();
     }
 
     public static void main(String[] args) {
@@ -24,13 +33,17 @@ public class Simulator {
         int machineNum = Integer.parseInt(args[0]);
         int jobNum = Integer.parseInt(args[1]);
         Simulator sim1 = new Simulator(machineNum, 0);
-        sim1.buildSimulator(machineNum, jobNum);
+//        sim1.buildSimulator(machineNum, jobNum);
+        sim1.buildSimulator();
+//        System.out.println(sim1.toString());
+//        sim1.testMove(sim1.machines[0].getJob(0), sim1.machines[1]);
         System.out.println(sim1.toString());
-        sim1.test1(sim1.machines[0].getJob(0), sim1.machines[1]);
+//        System.out.println("decided: " + sim1.bestResponseJob(sim1.machines[0].getJob(1)));
+        sim1.runRound();
         System.out.println(sim1.toString());
     }
 
-    public void test1(Job job, Machine destMachineID) {
+    public void testMove(Job job, Machine destMachineID) {
         try {
             this.move(job, destMachineID);
         } catch (Exception e) {
@@ -39,13 +52,18 @@ public class Simulator {
     }
 
     public Machine bestResponseJob(Job job) {
+        System.out.println("Started BRJ");
         Machine fromMachine = job.runningMachine;
         int startIndex = fromMachine.jobList.indexOf(job);
         Machine toMachine = job.runningMachine;
         int bestCompTime = job.completionTime;
         for (Machine machine : this.machines) {
             this.move(job, machine);
+            System.out.println(bestCompTime + " <best | cur> " + job.completionTime);
+            System.out.println(toMachine.ID + " <bestM | curM> " + job.runningMachine.ID);
             if (job.completionTime < bestCompTime) {
+                System.out.println("entered");
+                System.out.println(job.completionTime + " <time | mach> " + job.runningMachine.ID);
                 bestCompTime = job.completionTime;
                 toMachine = job.runningMachine;
             }
@@ -56,7 +74,23 @@ public class Simulator {
         return toMachine;
     }
 
-//    public void run
+    private void runRound() {
+        ListIterator iterator = this.allJobs.iterator();
+        while (iterator.current != null) {
+            Machine bestMachine = this.bestResponseJob(iterator.current.job);
+            if (iterator.current.job.runningMachine != bestMachine) {
+                this.move(iterator.current.job, bestMachine);
+            }
+            this.toString();
+            iterator.next();
+        }
+    }
+
+    public void runSimulator(int times) {
+        for (int i = 0; i < times; i++) {
+            System.out.println();
+        }
+    }
 
     public void move(Job job, Machine destMachineID) {
         int currMachineID = job.runningMachine.getID();
@@ -67,7 +101,7 @@ public class Simulator {
             iterator.next();
         }
         destMachineID.insert(job);
-        System.out.println("moved job: " + job.getID() + " from machine: " + currMachineID + " to machine: " + job.runningMachine.ID + "\n");
+        System.out.println("moved job: " + job.getID() + " from machine: " + currMachineID + " to machine: " + job.runningMachine.ID);
     }
 
     public String toString() {
@@ -83,7 +117,16 @@ public class Simulator {
             int processingTime = (int) (Math.random() * 10 + 1);
             int MachineID = (int) (Math.random() * numMachines);
             Job newJob = new Job(i, processingTime, this.machines[MachineID]);
-            this.chronoList.addLast(newJob);
+            this.allJobs.addLast(newJob);
+        }
+    }
+
+    public void buildSimulator() {
+        for (int i = 0; i < 10; i++) {
+            int processingTime = 10 - i;
+            int MachineID = i/2;
+            Job newJob = new Job(i, processingTime, this.machines[MachineID]);
+            this.allJobs.addLast(newJob);
         }
     }
 }

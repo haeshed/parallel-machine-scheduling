@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="toStrings, rename, test1 move">
+    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="added best response job">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653893829280</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added best response job">
+      <created>1653897323274</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1653897323274</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,7 +110,8 @@
     <MESSAGE value="able to run" />
     <MESSAGE value="added func runSim" />
     <MESSAGE value="toStrings, rename, test1 move" />
-    <option name="LAST_COMMIT_MESSAGE" value="toStrings, rename, test1 move" />
+    <MESSAGE value="added best response job" />
+    <option name="LAST_COMMIT_MESSAGE" value="added best response job" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
