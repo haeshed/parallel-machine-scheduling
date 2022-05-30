@@ -33,8 +33,8 @@ public class Simulator {
         int machineNum = Integer.parseInt(args[0]);
         int jobNum = Integer.parseInt(args[1]);
         Simulator sim1 = new Simulator(machineNum, 0);
-//        sim1.buildSimulator(machineNum, jobNum);
-        sim1.buildSimulator();
+        sim1.buildSimulator(machineNum, jobNum);
+//        sim1.buildSimulator();
 //        System.out.println(sim1.toString());
 //        sim1.testMove(sim1.machines[0].getJob(0), sim1.machines[1]);
         System.out.println(sim1.toString());
@@ -52,7 +52,7 @@ public class Simulator {
     }
 
     public Machine bestResponseJob(Job job) {
-        System.out.println("Started BRJ for job: " + job.getID() + "\n");
+        System.out.println("Started BRJ for job: " + job.getID());
         Machine fromMachine = job.runningMachine;
         int startIndex = fromMachine.jobList.indexOf(job);
         Machine toMachine = job.runningMachine;
@@ -63,7 +63,7 @@ public class Simulator {
 //            System.out.println(toMachine.ID + " <bestM | curM> " + job.runningMachine.ID);
 //            System.out.println(job.runningMachine.toString());
             if (job.completionTime < bestCompTime) {
-                System.out.println("-----switched best to mach "+ job.runningMachine.ID +" time "+ job.completionTime);
+                System.out.println("-----switched best to mach " + job.runningMachine.ID + " time " + job.completionTime);
 //                System.out.println(job.completionTime + " <time | mach> " + job.runningMachine.ID);
                 bestCompTime = job.completionTime;
                 toMachine = job.runningMachine;
@@ -107,7 +107,7 @@ public class Simulator {
             iterator.next();
         }
         destMachineID.insert(job);
-        System.out.println("moved job id: " + job.getID() + "   machines: " + currMachineID + " ---> " + job.runningMachine.ID);
+//        System.out.println("moved job id: " + job.getID() + "   machines: " + currMachineID + " ---> " + job.runningMachine.ID);
     }
 
     public String toString() {
@@ -127,7 +127,7 @@ public class Simulator {
         }
     }
 
-    public void setCompletionTime(){
+    public void setCompletionTime() {
         for (Machine machine : machines) {
             machine.setCompletionTime();
         }
