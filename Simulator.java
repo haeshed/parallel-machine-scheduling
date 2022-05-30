@@ -24,8 +24,7 @@ public class Simulator {
         int machineNum = Integer.parseInt(args[0]);
         int jobNum = Integer.parseInt(args[1]);
         Simulator sim1 = new Simulator(machineNum, 0);
-        sim1.runSimulator(machineNum, jobNum);
-        System.out.println("there");
+        sim1.buildSimulator(machineNum, jobNum);
         System.out.println(sim1.toString());
         sim1.test1(sim1.machines[0].getJob(0), sim1.machines[1]);
         System.out.println(sim1.toString());
@@ -38,6 +37,26 @@ public class Simulator {
             System.out.println("Exception: No such job/machine exists.\n");
         }
     }
+
+    public Machine bestResponseJob(Job job) {
+        Machine fromMachine = job.runningMachine;
+        int startIndex = fromMachine.jobList.indexOf(job);
+        Machine toMachine = job.runningMachine;
+        int bestCompTime = job.completionTime;
+        for (Machine machine : this.machines) {
+            this.move(job, machine);
+            if (job.completionTime < bestCompTime) {
+                bestCompTime = job.completionTime;
+                toMachine = job.runningMachine;
+            }
+        }
+        if (toMachine == fromMachine) {
+            fromMachine.jobList.add(startIndex, job);
+        }
+        return toMachine;
+    }
+
+//    public void run
 
     public void move(Job job, Machine destMachineID) {
         int currMachineID = job.runningMachine.getID();
@@ -53,13 +72,13 @@ public class Simulator {
 
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < machines.length; i++) {
-            s.append(machines[i].toString());
+        for (Machine machine : machines) {
+            s.append(machine.toString());
         }
         return s.toString();
     }
 
-    public void runSimulator(int numMachines, int numJobs) {
+    public void buildSimulator(int numMachines, int numJobs) {
         for (int i = 0; i < numJobs; i++) {
             int processingTime = (int) (Math.random() * 10 + 1);
             int MachineID = (int) (Math.random() * numMachines);

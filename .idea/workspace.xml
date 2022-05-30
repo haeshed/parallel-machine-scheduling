@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="toStrings, rename, test1 move" />
+    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="toStrings, rename, test1 move">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
