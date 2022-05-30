@@ -36,7 +36,7 @@ public class List {
      * Adds the given memory block at the beginning of this list.
      * Executes efficiently, in O(1).
      *
-     * @param block The memory block that is added at the list's beginning
+//     * @param block The memory block that is added at the list's beginning
      */
     public void addFirst(Job job) {
         Node newNode = new Node(job);
@@ -91,7 +91,7 @@ public class List {
     /**
      * Gets the index of the node containing the given memory block.
      *
-     * @param block The given memory block
+//     * @param block The given memory block
      * @return The index of the memory block, or -1 if the memory block is not in
      * this list
      */
@@ -116,9 +116,9 @@ public class List {
      * If the given index equals the list's size - 1, the new node becomes the last
      * node in this list.
      * If the new element is added at the beginning or at the end of this list,
-     * the addition's runtime is O(1). Othewrise is it O(size).
+     * the addition's runtime is O(1), Otherwise is it O(size).
      *
-     * @param block The memory block to add
+//     * @param block The memory block to add
      * @param index Where to insert the memory block
      * @throws IllegalArgumentException If index is negative or greater than the
      *                                  list's size - 1
@@ -167,10 +167,10 @@ public class List {
     public void remove(Job job) {
         int index = indexOf(job);
         // Handles index > 0 - from 1 to size (distinguishes between size and size - 1)
-        // expetcting to get indexes above size - suppose to crash during indexOf method
+        // expecting to get indexes above size - suppose to crash during indexOf method
         if (index > 0) {
             Node removePrev = getNode(index - 1); // Gets the previous node of the one holding the given job
-            if (index > 0 && index < size - 1) {
+            if (index < size - 1) {
                 Node temp = new Node(null);
                 temp.next = removePrev.next.next;
                 removePrev.next.next = null;
@@ -181,13 +181,11 @@ public class List {
                 removePrev.next = null;
             }
             size--;
-            // Handels index < 0 - mainly 0 and -1 which is recieved from indexOf, in case
+            // Handles index < 0 - mainly 0 and -1 which is received from indexOf, in case
             // the MemBlock is not within the list
         } else {
             if (index == 0) {
                 removeFirst();
-            } else {
-                return;
             }
         }
     }
