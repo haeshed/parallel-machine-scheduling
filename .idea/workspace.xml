@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="added best response job">
+    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="added runRound, build const sim">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/List.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +91,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653897323274</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added runRound, build const sim">
+      <created>1653899193946</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1653899193946</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,7 +120,8 @@
     <MESSAGE value="added func runSim" />
     <MESSAGE value="toStrings, rename, test1 move" />
     <MESSAGE value="added best response job" />
-    <option name="LAST_COMMIT_MESSAGE" value="added best response job" />
+    <MESSAGE value="added runRound, build const sim" />
+    <option name="LAST_COMMIT_MESSAGE" value="added runRound, build const sim" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -120,6 +130,25 @@
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="2" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Simulator.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Simulator.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/List.java</url>
+          <line>168</line>
+          <properties class="List" method="remove">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

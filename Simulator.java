@@ -68,20 +68,23 @@ public class Simulator {
                 toMachine = job.runningMachine;
             }
         }
-        if (toMachine == fromMachine) {
-            fromMachine.jobList.add(startIndex, job);
-        }
+        job.runningMachine.remove(job);
+        fromMachine.jobList.add(startIndex, job);
+        job.setRunningMachine(fromMachine);
+        job.setCompletionTime();
         return toMachine;
     }
 
     private void runRound() {
         ListIterator iterator = this.allJobs.iterator();
         while (iterator.current != null) {
+            Machine curMachine = iterator.current.job.runningMachine;
             Machine bestMachine = this.bestResponseJob(iterator.current.job);
-            if (iterator.current.job.runningMachine != bestMachine) {
+            if (curMachine != bestMachine) {
                 this.move(iterator.current.job, bestMachine);
             }
-            this.toString();
+            System.out.println();
+            System.out.println(this.toString());
             iterator.next();
         }
     }

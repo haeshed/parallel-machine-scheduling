@@ -22,8 +22,8 @@ public class List {
     /**
      * Adds the given memory block to the end of this list.
      * Executes efficiently, in O(1).
-     *
-//     * @param block The memory block that is added at the list's end
+     * <p>
+     * //     * @param block The memory block that is added at the list's end
      */
     public void addLast(Job job) {
         Node newNode = new Node(job);
@@ -35,8 +35,8 @@ public class List {
     /**
      * Adds the given memory block at the beginning of this list.
      * Executes efficiently, in O(1).
-     *
-//     * @param block The memory block that is added at the list's beginning
+     * <p>
+     * //     * @param block The memory block that is added at the list's beginning
      */
     public void addFirst(Job job) {
         Node newNode = new Node(job);
@@ -90,8 +90,9 @@ public class List {
 
     /**
      * Gets the index of the node containing the given memory block.
+     * <p>
+     * //     * @param block The given memory block
      *
-//     * @param block The given memory block
      * @return The index of the memory block, or -1 if the memory block is not in
      * this list
      */
@@ -117,8 +118,9 @@ public class List {
      * node in this list.
      * If the new element is added at the beginning or at the end of this list,
      * the addition's runtime is O(1), Otherwise is it O(size).
+     * <p>
+     * //     * @param block The memory block to add
      *
-//     * @param block The memory block to add
      * @param index Where to insert the memory block
      * @throws IllegalArgumentException If index is negative or greater than the
      *                                  list's size - 1
@@ -154,7 +156,7 @@ public class List {
         first.next.next = null;
         first.next = temp.next;
         temp.next = null;
-        last = first;
+        last = first.next;
         size--;
 
     }
@@ -183,10 +185,8 @@ public class List {
             size--;
             // Handles index < 0 - mainly 0 and -1 which is received from indexOf, in case
             // the MemBlock is not within the list
-        } else {
-            if (index == 0) {
-                removeFirst();
-            }
+        } else if (index == 0) {
+            removeFirst();
         }
     }
 
