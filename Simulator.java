@@ -59,8 +59,8 @@ public class Simulator {
         int bestCompTime = job.completionTime;
         for (Machine machine : this.machines) {
             this.move(job, machine);
-            System.out.println(bestCompTime + " <best | cur> " + job.completionTime);
-            System.out.println(toMachine.ID + " <bestM | curM> " + job.runningMachine.ID);
+//            System.out.println(bestCompTime + " <best | cur> " + job.completionTime);
+//            System.out.println(toMachine.ID + " <bestM | curM> " + job.runningMachine.ID);
 //            System.out.println(job.runningMachine.toString());
             if (job.completionTime < bestCompTime) {
                 System.out.println("-----switched best to mach "+ job.runningMachine.ID +" time "+ job.completionTime);

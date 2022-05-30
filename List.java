@@ -131,7 +131,7 @@ public class List {
         }
         if (index == 0) {
             addFirst(job);
-        } else if (index == size) {
+        } else if (index + 1 == size) {
             addLast(job);
         } else {
             Node newNode = new Node(job);
@@ -156,7 +156,7 @@ public class List {
         first.next.next = null;
         first.next = temp.next;
         temp.next = null;
-        last = first.next;
+        if (size == 2) last = first.next;
         size--;
 
     }
