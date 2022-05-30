@@ -178,10 +178,12 @@ public class List {
                 removePrev.next.next = null;
                 removePrev.next = temp.next;
                 temp.next = null;
+                updateLast();
             } else {
                 last = removePrev;
                 removePrev.next = null;
             }
+            job.setMachine(null);
             size--;
             // Handles index < 0 - mainly 0 and -1 which is received from indexOf, in case
             // the MemBlock is not within the list
@@ -212,5 +214,11 @@ public class List {
             current = current.next;
         }
         return s.substring(0, s.length() - 1) + "]";
+    }
+
+    private void updateLast() {
+        ListIterator iterator = this.iterator();
+        while (iterator.hasNext()) iterator.next();
+        last = iterator.current;
     }
 }

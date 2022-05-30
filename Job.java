@@ -41,8 +41,10 @@ public class Job {
             this.completionTime = processingTime;
         } else {
             ListIterator iterator = runningMachine.jobList.iterator();
+//            System.out.println(iterator.toString());
             int accCompletionTime = 0;
-            while (iterator.current.job != this) {
+            while (iterator.current != null) {
+                if (iterator.current.job == this) break;
                 accCompletionTime += iterator.current.job.getProcessingTime();
                 iterator.next();
             }
@@ -55,10 +57,10 @@ public class Job {
     }
 
     public String toString() {
-        return String.format("%1$47s","{ Job " + this.ID + " Processing Time: " + processingTime + " completionTime " + completionTime + " }");
+        return String.format("%1$47s", "{ Job " + this.ID + " Processing Time: " + processingTime + " completionTime " + completionTime + " }");
     }
 
     public String toString2() {
-        return String.format("%1$22s","{ Job " + this.ID + " PT: " + processingTime + " CT " + completionTime + " }");
+        return String.format("%1$22s", "{ Job " + this.ID + " PT: " + processingTime + " CT " + completionTime + " }");
     }
 }

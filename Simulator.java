@@ -52,7 +52,7 @@ public class Simulator {
     }
 
     public Machine bestResponseJob(Job job) {
-        System.out.println("Started BRJ");
+        System.out.println("Started BRJ for job: " + job.getID() + "\n");
         Machine fromMachine = job.runningMachine;
         int startIndex = fromMachine.jobList.indexOf(job);
         Machine toMachine = job.runningMachine;
@@ -71,7 +71,7 @@ public class Simulator {
         job.runningMachine.remove(job);
         fromMachine.jobList.add(startIndex, job);
         job.setRunningMachine(fromMachine);
-        job.setCompletionTime();
+        fromMachine.setCompletionTime();
         return toMachine;
     }
 
@@ -82,7 +82,9 @@ public class Simulator {
             Machine bestMachine = this.bestResponseJob(iterator.current.job);
             if (curMachine != bestMachine) {
                 this.move(iterator.current.job, bestMachine);
-            }
+                System.out.println("finished BRJ, moved to: " + iterator.current.job.completionTime + " <time | mach> " + iterator.current.job.runningMachine.ID);
+            } else
+                System.out.println("finished BRJ, stayed at: " + iterator.current.job.completionTime + " <time | mach> " + iterator.current.job.runningMachine.ID);
             System.out.println();
             System.out.println(this.toString());
             iterator.next();
@@ -104,7 +106,7 @@ public class Simulator {
             iterator.next();
         }
         destMachineID.insert(job);
-        System.out.println("moved job: " + job.getID() + " from machine: " + currMachineID + " to machine: " + job.runningMachine.ID);
+        System.out.println("moved job id: " + job.getID() + "   machines: " + currMachineID + " ---> " + job.runningMachine.ID);
     }
 
     public String toString() {
@@ -127,7 +129,7 @@ public class Simulator {
     public void buildSimulator() {
         for (int i = 0; i < 10; i++) {
             int processingTime = 10 - i;
-            int MachineID = i/2;
+            int MachineID = i / 2;
             Job newJob = new Job(i, processingTime, this.machines[MachineID]);
             this.allJobs.addLast(newJob);
         }

@@ -19,7 +19,7 @@ public class ListIterator {
      * Checks if this iterator has more elements to process
      */
     public boolean hasNext() {
-        return (current != null);
+        return (current.next != null);
     }
 
     /**
@@ -33,4 +33,9 @@ public class ListIterator {
         current = current.next;
         return currentNode.job;
     }
+
+//    @Override
+//    public String toString() {
+//        return "ListIterator{" + "current= " + current + " next= " + this.next() + '}';
+//    }
 }
