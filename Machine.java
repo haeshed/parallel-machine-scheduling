@@ -93,7 +93,7 @@ public class Machine {
 
     public String toString() {
         StringBuilder s = new StringBuilder("");
-        s.append("Machine " + this.ID + ": " + jobList.toString() + "\n");
+        s.append("Machine " + this.ID + ":      " + jobList.toString() + "\n");
         return s.toString();
     }
 

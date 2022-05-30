@@ -8,12 +8,16 @@ public class ListIterator {
     // Current position in the list (cursor)
     public Node current;
 
-    /** Constructs a list iterator, starting at the given node */
+    /**
+     * Constructs a list iterator, starting at the given node
+     */
     public ListIterator(Node node) {
         current = node;
     }
 
-    /** Checks if this iterator has more elements to process */
+    /**
+     * Checks if this iterator has more elements to process
+     */
     public boolean hasNext() {
         return (current != null);
     }
@@ -21,7 +25,7 @@ public class ListIterator {
     /**
      * Returns the next job in the list, and advances the cursor position.
      * This method may be called repeatedly, to iterate through the list.
-     * 
+     *
      * @return the job at the cursor's location
      */
     public Job next() {

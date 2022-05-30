@@ -55,6 +55,10 @@ public class Job {
     }
 
     public String toString() {
-        return "{ Job " + this.ID + " Processing Time: " + processingTime + " completionTime " + completionTime + " }";
+        return String.format("%1$47s","{ Job " + this.ID + " Processing Time: " + processingTime + " completionTime " + completionTime + " }");
+    }
+
+    public String toString2() {
+        return String.format("%1$22s","{ Job " + this.ID + " PT: " + processingTime + " CT " + completionTime + " }");
     }
 }
