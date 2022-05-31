@@ -32,9 +32,9 @@ public class Simulator {
         // Building a simulator
         int machineNum = Integer.parseInt(args[0]);
         int jobNum = Integer.parseInt(args[1]);
-        Simulator sim1 = new Simulator(machineNum, 0);
-        sim1.buildSimulator(machineNum, jobNum);
-//        sim1.buildSimulator();
+        Simulator sim1 = new Simulator(5, 0);
+//        sim1.buildSimulator(machineNum, jobNum);
+        sim1.buildSimulator();
 //        System.out.println(sim1.toString());
 //        sim1.testMove(sim1.machines[0].getJob(0), sim1.machines[1]);
         System.out.println(sim1.toString());
@@ -69,6 +69,7 @@ public class Simulator {
                 toMachine = job.runningMachine;
             }
         }
+//        System.out.println(this.toString());
         job.runningMachine.remove(job);
         fromMachine.jobList.add(startIndex, job);
         job.setRunningMachine(fromMachine);
@@ -127,18 +128,25 @@ public class Simulator {
         }
     }
 
+    public void buildSimulator() {
+        for (int i = 0; i < 10; i++) {
+            int processingTime = 10 - i;
+            int MachineID = i / 3;
+            Job newJob = new Job(i, processingTime, this.machines[MachineID]);
+            this.allJobs.addLast(newJob);
+        }
+    }
+
     public void setCompletionTime() {
         for (Machine machine : machines) {
             machine.setCompletionTime();
         }
     }
 
-    public void buildSimulator() {
-        for (int i = 0; i < 10; i++) {
-            int processingTime = 10 - i;
-            int MachineID = i / 2;
-            Job newJob = new Job(i, processingTime, this.machines[MachineID]);
-            this.allJobs.addLast(newJob);
+    public int checkFirstNull(){
+        for (int i = 0; i < machines.length; i++) {
+            if(machines[i].jobList.getFirst()==null) return i;
         }
+        return -1;
     }
 }

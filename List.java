@@ -27,9 +27,10 @@ public class List {
      */
     public void addLast(Job job) {
         Node newNode = new Node(job);
-        size++;
-        last.next = newNode;
+        if (size == 0) first.next = newNode;
+        else last.next = newNode;
         last = newNode;
+        size++;
     }
 
     /**
@@ -49,6 +50,10 @@ public class List {
             first.next = newNode;
             last = first.next;
         }
+    }
+
+    public Node getFirst() {
+        return first;
     }
 
     /**
