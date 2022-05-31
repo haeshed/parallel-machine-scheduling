@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="job, list, ListIterator fixes, added setCP in machine,">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="testing" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,7 +36,7 @@
     <configuration name="Simulator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Simulator" />
       <module name="parallel-machine-scheduling" />
-      <option name="PROGRAM_PARAMETERS" value="5 10" />
+      <option name="PROGRAM_PARAMETERS" value="3 7" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -60,6 +58,7 @@
       <workItem from="1653890584867" duration="3441000" />
       <workItem from="1653912213419" duration="2142000" />
       <workItem from="1653927873642" duration="4000" />
+      <workItem from="1653942452311" duration="4521000" />
     </task>
     <task id="LOCAL-00001" summary="able to run">
       <created>1653890708466</created>
@@ -110,7 +109,28 @@
       <option name="project" value="LOCAL" />
       <updated>1653906821088</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added setCP func to Simulator+Machine">
+      <created>1653943884447</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1653943884447</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fixed loss of jobs, list add">
+      <created>1653946379803</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1653946379803</updated>
+    </task>
+    <task id="LOCAL-00010" summary="testing">
+      <created>1653946970134</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1653946970134</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,7 +155,10 @@
     <MESSAGE value="added runRound, build const sim" />
     <MESSAGE value="bug List.removefirst, fix BRJ, fix run round," />
     <MESSAGE value="job, list, ListIterator fixes, added setCP in machine," />
-    <option name="LAST_COMMIT_MESSAGE" value="job, list, ListIterator fixes, added setCP in machine," />
+    <MESSAGE value="added setCP func to Simulator+Machine" />
+    <MESSAGE value="fixed loss of jobs, list add" />
+    <MESSAGE value="testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="testing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

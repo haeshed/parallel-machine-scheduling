@@ -33,8 +33,8 @@ public class Simulator {
         int machineNum = Integer.parseInt(args[0]);
         int jobNum = Integer.parseInt(args[1]);
         Simulator sim1 = new Simulator(5, 0);
-//        sim1.buildSimulator(machineNum, jobNum);
-        sim1.buildSimulator();
+        sim1.buildSimulator(jobNum);
+//        sim1.buildSimulator();
 //        System.out.println(sim1.toString());
 //        sim1.testMove(sim1.machines[0].getJob(0), sim1.machines[1]);
         System.out.println(sim1.toString());
@@ -119,10 +119,10 @@ public class Simulator {
         return s.toString();
     }
 
-    public void buildSimulator(int numMachines, int numJobs) {
+    public void buildSimulator(int numJobs) {
         for (int i = 0; i < numJobs; i++) {
             int processingTime = (int) (Math.random() * 10 + 1);
-            int MachineID = (int) (Math.random() * numMachines);
+            int MachineID = (int) (Math.random() * this.machines.length);
             Job newJob = new Job(i, processingTime, this.machines[MachineID]);
             this.allJobs.addLast(newJob);
         }
