@@ -206,6 +206,12 @@ public class List {
         return new ListIterator(first.next);
     }
 
+
+    private void updateLast() {
+        ListIterator iterator = this.iterator();
+        while (iterator.hasNext()) iterator.next();
+        last = iterator.current;
+    }
     /**
      * A textual representation of this list.
      *
@@ -215,15 +221,9 @@ public class List {
         String s = "[ ";
         Node current = first.next; // Skips the dummy
         while (current != null) {
-            s = s + current.job.toString2() + "     ";
+            s = s + current.job.toString2() + "   ";
             current = current.next;
         }
         return s.substring(0, s.length() - 1) + "]";
-    }
-
-    private void updateLast() {
-        ListIterator iterator = this.iterator();
-        while (iterator.hasNext()) iterator.next();
-        last = iterator.current;
     }
 }

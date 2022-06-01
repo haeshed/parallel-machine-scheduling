@@ -8,14 +8,14 @@ public class Simulator {
      */
     Machine[] machines;
     List allJobs;
-    int round;
+//    int round;
 
-    public Simulator(int machineNum, int round) {
+    public Simulator(int machineNum) {
         this.machines = new Machine[machineNum];
         for (int i = 0; i < machines.length; i++) {
             machines[i] = new Machine(i, 0);
         }
-        this.round = round;
+//        this.round = round;
         this.allJobs = new List();
     }
 
@@ -24,7 +24,7 @@ public class Simulator {
         for (int i = 0; i < 5; i++) {
             machines[i] = new Machine(i, 0);
         }
-        this.round = 10;
+//        this.round = 10;
         this.allJobs = new List();
     }
 
@@ -32,15 +32,15 @@ public class Simulator {
         // Building a simulator
         int machineNum = Integer.parseInt(args[0]);
         int jobNum = Integer.parseInt(args[1]);
-        Simulator sim1 = new Simulator(5, 0);
-        sim1.buildSimulator(jobNum);
-//        sim1.buildSimulator();
+        Simulator sim1 = new Simulator(5);
+        sim1.addJobs2Sim(jobNum);
+//        sim1.addJobs2Sim();
         System.out.println(sim1.toString());
         sim1.runRound();
         System.out.println(sim1.toString());
     }
 
-    public void buildSimulator(int numJobs) {
+    public void addJobs2Sim(int numJobs) {
         for (int i = 0; i < numJobs; i++) {
             int processingTime = (int) (Math.random() * 10 + 1);
             int MachineID = (int) (Math.random() * this.machines.length);
@@ -49,7 +49,7 @@ public class Simulator {
         }
     }
 
-    public void buildSimulator() {
+    public void addJobs2Sim() {
         for (int i = 0; i < 10; i++) {
             int processingTime = 10 - i;
             int MachineID = i / 3;
