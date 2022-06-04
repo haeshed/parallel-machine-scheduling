@@ -8,12 +8,13 @@ public class Simulator {
      */
     Machine[] machines;
     List allJobs;
+    int policies;
 //    int round;
 
-    public Simulator(int machineNum) {
+    public Simulator(int machineNum, int policies) {
         this.machines = new Machine[machineNum];
         for (int i = 0; i < machines.length; i++) {
-            machines[i] = new Machine(i, 0);
+            machines[i] = new Machine(i, policies);
         }
 //        this.round = round;
         this.allJobs = new List();
@@ -32,12 +33,13 @@ public class Simulator {
         // Building a simulator
         int machineNum = Integer.parseInt(args[0]);
         int jobNum = Integer.parseInt(args[1]);
-        Simulator sim1 = new Simulator(5);
-        sim1.addJobs2Sim(jobNum);
-//        sim1.addJobs2Sim();
+        Simulator sim1 = new Simulator(3, 0);
+//        Simulator sim1 = new Simulator(machineNum, Integer.parseInt(args[2]));
+//        sim1.addJobs2Sim(jobNum);
+        sim1.addJobs2Sim();
         System.out.println(sim1.toString());
-        sim1.runRound();
-        System.out.println(sim1.toString());
+//        sim1.runRound();
+        sim1.runSimulator();
     }
 
     public void addJobs2Sim(int numJobs) {
@@ -50,35 +52,52 @@ public class Simulator {
     }
 
     public void addJobs2Sim() {
-        for (int i = 0; i < 10; i++) {
-            int processingTime = 10 - i;
-            int MachineID = i / 3;
+        for (int i = 0; i < 20; i++) {
+            int processingTime = 20 - i;
+            int MachineID = i / 7;
             Job newJob = new Job(i, processingTime, this.machines[MachineID]);
             this.allJobs.addLast(newJob);
         }
     }
 
     public void runSimulator(int times) {
+        int rounds = 0;
         for (int i = 0; i < times; i++) {
             runRound();
-            System.out.println(this.toString());
+            System.out.println("End of round " + i+"\n" + this.toString());
+            rounds++;
         }
+        System.out.println("Sim finished given " + rounds + " rounds.");
     }
 
-    private void runRound() {
+    public void runSimulator() {
+        boolean same = false;
+        int rounds = 0;
+        while (!same) {
+            same = runRound();
+            System.out.println(this.toString());
+            rounds++;
+        }
+        System.out.println("Sim ended after " + rounds + " rounds.");
+    }
+
+    private boolean runRound() {
         ListIterator iterator = this.allJobs.iterator();
+        boolean same = false;
         while (iterator.current != null) {
             Machine curMachine = iterator.current.job.runningMachine;
             Machine bestMachine = this.bestResponseJob(iterator.current.job);
             if (curMachine != bestMachine) {
                 this.move(iterator.current.job, bestMachine);
                 System.out.println("finished BRJ, moved to: " + iterator.current.job.runningMachine.ID + " <mach | time> " + iterator.current.job.completionTime);
+                same = true;
             } else
                 System.out.println("finished BRJ, stayed at: " + iterator.current.job.runningMachine.ID + " <mach | time> " + iterator.current.job.completionTime);
             System.out.println();
             System.out.println(this.toString());
             iterator.next();
         }
+        return same;
     }
 
     public Machine bestResponseJob(Job job) {
@@ -122,9 +141,9 @@ public class Simulator {
         }
     }
 
-    public int checkFirstNull(){
+    public int checkFirstNull() {
         for (int i = 0; i < machines.length; i++) {
-            if(machines[i].jobList.getFirst()==null) return i;
+            if (machines[i].jobList.getFirst() == null) return i;
         }
         return -1;
     }

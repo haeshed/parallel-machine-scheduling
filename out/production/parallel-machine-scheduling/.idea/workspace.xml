@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="testing" />
+    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="toString4, removed round field, change func name">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Job.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Job.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +43,7 @@
     <configuration name="Simulator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Simulator" />
       <module name="parallel-machine-scheduling" />
-      <option name="PROGRAM_PARAMETERS" value="3 7" />
+      <option name="PROGRAM_PARAMETERS" value="5 20 0" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -59,6 +66,9 @@
       <workItem from="1653912213419" duration="2142000" />
       <workItem from="1653927873642" duration="4000" />
       <workItem from="1653942452311" duration="4521000" />
+      <workItem from="1653978641466" duration="3008000" />
+      <workItem from="1654103633276" duration="1088000" />
+      <workItem from="1654150387509" duration="2857000" />
     </task>
     <task id="LOCAL-00001" summary="able to run">
       <created>1653890708466</created>
@@ -130,7 +140,35 @@
       <option name="project" value="LOCAL" />
       <updated>1653946970134</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fixed add last">
+      <created>1653981303416</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1653981303416</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixed add last, fixed build simulator">
+      <created>1653981451945</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1653981451945</updated>
+    </task>
+    <task id="LOCAL-00013" summary="order of simulator func">
+      <created>1653981649151</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1653981649151</updated>
+    </task>
+    <task id="LOCAL-00014" summary="toString4, removed round field, change func name">
+      <created>1654104650080</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1654104650080</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,7 +196,12 @@
     <MESSAGE value="added setCP func to Simulator+Machine" />
     <MESSAGE value="fixed loss of jobs, list add" />
     <MESSAGE value="testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing" />
+    <MESSAGE value="fixed add last" />
+    <MESSAGE value="fixed build simulator" />
+    <MESSAGE value="fixed add last, fixed build simulator" />
+    <MESSAGE value="order of simulator func" />
+    <MESSAGE value="toString4, removed round field, change func name" />
+    <option name="LAST_COMMIT_MESSAGE" value="toString4, removed round field, change func name" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -176,7 +219,18 @@
           <line>50</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Simulator.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="machines" language="JAVA" />
+        <watch expression="iterator.current.job" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
