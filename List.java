@@ -23,12 +23,14 @@ public class List {
      * Adds the given memory block to the end of this list.
      * Executes efficiently, in O(1).
      * <p>
-     * //     * @param block The memory block that is added at the list's end
+     * // * @param block The memory block that is added at the list's end
      */
     public void addLast(Job job) {
         Node newNode = new Node(job);
-        if (size == 0) first.next = newNode;
-        else last.next = newNode;
+        if (size == 0)
+            first.next = newNode;
+        else
+            last.next = newNode;
         last = newNode;
         size++;
     }
@@ -37,7 +39,7 @@ public class List {
      * Adds the given memory block at the beginning of this list.
      * Executes efficiently, in O(1).
      * <p>
-     * //     * @param block The memory block that is added at the list's beginning
+     * // * @param block The memory block that is added at the list's beginning
      */
     public void addFirst(Job job) {
         Node newNode = new Node(job);
@@ -96,10 +98,10 @@ public class List {
     /**
      * Gets the index of the node containing the given memory block.
      * <p>
-     * //     * @param block The given memory block
+     * // * @param block The given memory block
      *
      * @return The index of the memory block, or -1 if the memory block is not in
-     * this list
+     *         this list
      */
     public int indexOf(Job job) {
         int iteratingIndex = 0;
@@ -124,7 +126,7 @@ public class List {
      * If the new element is added at the beginning or at the end of this list,
      * the addition's runtime is O(1), Otherwise is it O(size).
      * <p>
-     * //     * @param block The memory block to add
+     * // * @param block The memory block to add
      *
      * @param index Where to insert the memory block
      * @throws IllegalArgumentException If index is negative or greater than the
@@ -136,14 +138,14 @@ public class List {
         }
         if (index == 0) {
             addFirst(job);
-        } else if (index + 1 == size) {
+        } else if (index == size) {
             addLast(job);
         } else {
             Node newNode = new Node(job);
             newNode.next = getNode(index);
             getNode(index - 1).next = newNode;
+            size++;
         }
-        size++;
     }
 
     /**
@@ -161,7 +163,9 @@ public class List {
         first.next.next = null;
         first.next = temp.next;
         temp.next = null;
-        if (size == 2) last = first.next;
+        if (size == 2) {
+            last = first.next;
+        }
         size--;
 
     }
@@ -197,6 +201,70 @@ public class List {
         }
     }
 
+    /*
+     * Sorts the list according to the processing time of the jobs, from small to
+     * large
+     */
+    public void sort() {
+        if (this.size <= 1)
+            return;
+        int i = 0;
+        while (i != size - 1) {
+            Node prev = first.next;
+            Node curr = first.next.next;
+            for (int j = 0; (j < (size - i - 1)); j++) {
+                if (prev.job.processingTime > curr.job.processingTime) {
+                    swap(prev, curr);
+                    curr = prev.next;
+                    this.updateLast();
+                } else {
+                    prev = prev.next;
+                    curr = curr.next;
+                }
+            }
+            i++;
+        }
+    }
+
+    /*
+     * Sorts the list according to the processing time of the jobs, from large to
+     * small
+     */
+    public void sortReverse() {
+        if (this.size <= 1)
+            return;
+        int i = 0;
+        while (i != size - 1) {
+            Node prev = first.next;
+            Node curr = first.next.next;
+            for (int j = 0; (j < (size - i - 1)); j++) {
+                if (prev.job.processingTime < curr.job.processingTime) {
+                    swap(prev, curr);
+                    curr = prev.next;
+                    this.updateLast();
+                } else {
+                    prev = prev.next;
+                    curr = curr.next;
+                }
+            }
+            i++;
+        }
+    }
+
+    private void swap(Node x, Node y) {
+        int index = indexOf(x.job);
+        Machine runningMachineY = y.job.runningMachine;
+        remove(y.job);
+        // if (index + 1 == size) {
+        // Node newNode = new Node(y.job);
+        // newNode.next = getNode(index);
+        // getNode(index - 1).next = newNode;
+        // size++;
+        // } else
+        add(index, y.job);
+        y.job.setRunningMachine(runningMachineY);
+    }
+
     /**
      * Returns an iterator over this list, starting with the first element.
      *
@@ -206,12 +274,13 @@ public class List {
         return new ListIterator(first.next);
     }
 
-
     private void updateLast() {
         ListIterator iterator = this.iterator();
-        while (iterator.hasNext()) iterator.next();
+        while (iterator.hasNext())
+            iterator.next();
         last = iterator.current;
     }
+
     /**
      * A textual representation of this list.
      *

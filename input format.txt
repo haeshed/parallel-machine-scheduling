@@ -1,0 +1,15 @@
+machine number (an int value between 1 - n)
+machine 0 policy (an int value between 0 - 3)
+machine 1 policy (an int value between 0 - 3)
+.
+.
+.
+machine n-1 policy (an int value between 0 - 3)
+job number (an int value between 1 - n)
+job 0 processing time (an int value between 1 - 10) running machine (an int value between 0 - n-1)
+job 1 processing time (an int value between 1 - 10) running machine (an int value between 0 - n-1)
+.
+.
+.
+job n-1 processing time (an int value between 1 - 10) running machine (an int value between 0 - n-1)
+round type (an int value 1 (for SPT) or 2 (for LPT))
