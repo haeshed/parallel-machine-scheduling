@@ -36,14 +36,13 @@ public class Machine {
     /*
      * inserts a new job to this machine taking into account this machine's
      * policy:
-     * policy 0 - adds to the end of the line
+     * policy 0 = adds to the end of the line
      * policy 1 = add to the beggining of the line
-     * policy 2 = adds ti the correct position keeping the jobs on the machine
+     * policy 2 = adds to the correct position keeping the jobs on the machine
      * from small to large
-     * policy 3 = adds ti the correct position keeping the jobs on the machine
+     * policy 3 = adds to the correct position keeping the jobs on the machine
      * from large to small
      */
-
     public void insert(Job job) {
         if (policy == 0) {
             jobList.addLast(job);
@@ -52,42 +51,23 @@ public class Machine {
         } else if (policy == 1) {
             jobList.addFirst(job);
             job.setRunningMachine(this);
-            job.setCompletionTime();
+            setCompletionTime();
         } else if (policy == 2) {
-            ListIterator iterator = jobList.iterator();
-            int index = 0;
-            while (iterator.current != null && iterator.current.job.getProcessingTime() <= job.getProcessingTime()) {
-                iterator.next();
-                index++;
-            }
-            if (iterator.current != null) {
-                jobList.addLast(job);
-            } else {
-                jobList.add(index - 1, job);
-            }
+            jobList.addLast(job);
             job.setRunningMachine(this);
-            job.setCompletionTime();
+            jobList.sort();
+            setCompletionTime();
         } else if (policy == 3) {
-            ListIterator iterator = jobList.iterator();
-            int index = 0;
-            while (iterator.current != null && iterator.current.job.getProcessingTime() >= job.getProcessingTime()) {
-                iterator.next();
-                index++;
-            }
-            if (iterator.current != null) {
-                jobList.addLast(job);
-            } else {
-                jobList.add(index - 1, job);
-            }
+            jobList.addLast(job);
             job.setRunningMachine(this);
-            job.setCompletionTime();
+            jobList.sortReverse();
+            setCompletionTime();
         }
     }
 
     public void setCompletionTime() {
         ListIterator iterator = jobList.iterator();
-        int accCompletionTime = 0;
-        while (iterator.current!=null) {
+        while (iterator.current != null) {
             iterator.current.job.setCompletionTime();
             iterator.next();
         }
