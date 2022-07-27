@@ -3,8 +3,8 @@ public class Simulator {
      * Represents a simulator.
      * A Simulator has an array of machines, a chronoList (which is a list keeping
      * all the
-     * machines in an ascending oreder of their IDs) and a round (which is the
-     * order of iteraing threw the jobs and asking them if hey want to change
+     * machines in ascending order of their IDs) and a round (which is the
+     * order of iterating threw the jobs and asking them if hey want to change
      * machines).
      */
     Machine[] machines;
@@ -17,11 +17,11 @@ public class Simulator {
 
     /*
      * The main function runs the simulator with different input types. input can be
-     * command line arguments (number of machines, policy (same one for all
+     * command line arguments number of machines, policy (same one for all
      * machines, number of jobs, round type) or a file in the format attached with
      * this source code. the file details the same parameters as in the command line
-     * arguments. in addition the file contains of initial scheduling of the jobs
-     * onto the machines and it is possible to dectate a different policy for each
+     * arguments. in addition, the file contains of initial scheduling of the jobs
+     * onto the machines, and it is possible to dictate a different policy for each
      * machine.
      * When invoked the simulator will run until reaching stable state
      * (Nash Equilibrium) or until reaching a predefined amount of rounds (currently
@@ -36,7 +36,7 @@ public class Simulator {
         } else if (args.length == 4) {
             int machineNum = Integer.parseInt(args[0]); // an int value between 1 - n
             int policy = Integer.parseInt(args[1]); // an int value between 0 - 3 (detailed policies' behavior are in
-                                                    // class Machine under insert function)
+                                                    // class Machine under insert function
             int jobNum = Integer.parseInt(args[2]); // an int value between 1 - n
             int roundType = Integer.parseInt(args[3]); // an int value 1 (for SPT) or 2 (LPT)
             readFromCommandLine(machineNum, policy, jobNum, roundType);
@@ -89,7 +89,7 @@ public class Simulator {
     }
 
     /*
-     * runs the Simulaor with the required round type (LPT/SPT), where SPT = 1 and
+     * runs the Simulator with the required round type (LPT/SPT), where SPT = 1 and
      * LPT = 2
      */
     public void runSimulator(int lptOrSpt) {
@@ -102,7 +102,7 @@ public class Simulator {
             rounds++;
         }
         if (rounds == 10 && !same) {
-            System.out.println("Sim ended after reachning stopping condition " + rounds + " rounds.");
+            System.out.println("Sim ended after reaching stopping condition " + rounds + " rounds.");
         } else
             System.out.println("Sim reached stable state after " + rounds + " rounds.");
     }

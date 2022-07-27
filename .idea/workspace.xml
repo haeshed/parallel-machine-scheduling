@@ -2,12 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="toString4, removed round field, change func name">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Job.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Job.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/ListIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/ListIterator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Machine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Machine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Node.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/StdIn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/StdIn.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Tester.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Tester.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +23,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -33,17 +41,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "settings.editor.selected.configurable": "configurable.group.editor"
+  }
+}]]></component>
   <component name="RunManager">
     <configuration name="Simulator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Simulator" />
       <module name="parallel-machine-scheduling" />
-      <option name="PROGRAM_PARAMETERS" value="5 20 0" />
+      <option name="PROGRAM_PARAMETERS" value="input2.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
