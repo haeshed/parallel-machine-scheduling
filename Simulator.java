@@ -2,10 +2,7 @@ public class Simulator {
     /**
      * Represents a simulator.
      * A Simulator has an array of machines, a chronoList (which is a list keeping
-     * all the
-     * machines in an ascending oreder of their IDs) and a round (which is the
-     * order of iteraing threw the jobs and asking them if hey want to change
-     * machines).
+     * all the machines in an ascending order of their IDs)
      */
     Machine[] machines;
     List allJobs;
@@ -33,13 +30,14 @@ public class Simulator {
         } else if (args.length == 1) {
             String fileName = args[0];
             readFromFile(fileName);
-        } else if (args.length == 4) {
+        } else if (args.length == 5) {
             int machineNum = Integer.parseInt(args[0]); // an int value between 1 - n
             int policy = Integer.parseInt(args[1]); // an int value between 0 - 3 (detailed policies' behavior are in
                                                     // class Machine under insert function)
-            int jobNum = Integer.parseInt(args[2]); // an int value between 1 - n
-            int roundType = Integer.parseInt(args[3]); // an int value 1 (for SPT) or 2 (LPT)
-            readFromCommandLine(machineNum, policy, jobNum, roundType);
+            double speed = Double.parseDouble(args[2]); // a double value larger than 0
+            int jobNum = Integer.parseInt(args[3]); // an int value between 1 - n
+            int roundType = Integer.parseInt(args[4]); // an int value 1 (for SPT) or 2 (LPT)
+            readFromCommandLine(machineNum, policy, speed, jobNum, roundType);
         } else {
             throw new IllegalArgumentException("too many arguments");
         }
@@ -47,32 +45,78 @@ public class Simulator {
 
     public static void readFromFile(String fileName) {
         StdIn.setInput(fileName);
+        int roundType = StdIn.readInt();
         int machineNum = StdIn.readInt();
         Simulator sim1 = new Simulator(machineNum);
         for (int i = 0; i < machineNum; i++) {
             int policy = StdIn.readInt();
-            sim1.machines[i] = new Machine(i, policy);
+            double speed = StdIn.readDouble();
+            sim1.machines[i] = new Machine(i, policy, speed);
         }
         int jobNum = StdIn.readInt();
-        sim1.addJobs2Sim(jobNum);
+        sim1.addJobs2Sim(jobNum, roundType);
         System.out.println(sim1.toString());
-        int roundType = StdIn.readInt();
         sim1.runSimulator(roundType);
     }
 
-    public void addJobs2Sim(int numJobs) {
+    public void addJobs2Sim(int numJobs, int roundType) {
+        Machine pseudoMachine = new Machine(-1, 0, 1);
+        double inf = Double.POSITIVE_INFINITY;
+        Job pseudoJob = new Job(-1, inf, pseudoMachine);
         for (int i = 0; i < numJobs; i++) {
-            int processingTime = StdIn.readInt();
-            int MachineID = StdIn.readInt();
-            Job newJob = new Job(i, processingTime, this.machines[MachineID]);
+            double processingTime = StdIn.readDouble();
+            Job newJob = new Job(i, processingTime, pseudoMachine);
             this.allJobs.addLast(newJob);
+        }
+        initialSchedule(pseudoMachine, roundType);
+    }
+
+    public void initialSchedule(Machine pseudoMachine, int roundType) {
+        sortAllJobs(roundType);
+        ListIterator iterator = this.allJobs.iterator();
+        while (iterator.current != null) {
+            Machine curMachine = iterator.current.job.runningMachine;
+            Machine bestMachine = this.bestResponseJobInitial(iterator.current.job, pseudoMachine);
+            if (curMachine != bestMachine) {
+                this.moveIinitial(iterator.current.job, pseudoMachine, bestMachine);
+            }
+            System.out.println();
+            iterator.next();
         }
     }
 
-    public static void readFromCommandLine(int machineNum, int policy, int jobNum, int roundType) {
+    public Machine bestResponseJobInitial(Job job, Machine pseudoMachine) {
+        int startIndex = pseudoMachine.jobList.indexOf(job);
+        Machine toMachine = pseudoMachine;
+        double bestCompTime = job.completionTime;
+        for (Machine machine : this.machines) {
+            this.moveIinitial(job, pseudoMachine, machine);
+            if (job.completionTime < bestCompTime) {
+                bestCompTime = job.completionTime;
+                toMachine = job.runningMachine;
+            }
+            job.runningMachine.remove(job);
+        }
+        pseudoMachine.jobList.add(startIndex, job);
+        job.setRunningMachine(pseudoMachine);
+        this.setCompletionTime();
+        return toMachine;
+    }
+
+    public void moveIinitial(Job job, Machine currentMachine, Machine destMachine) {
+        currentMachine.remove(job);
+        ListIterator iterator = currentMachine.jobList.iterator();
+        while (iterator.current != null) {
+            iterator.current.job.setCompletionTime();
+            iterator.next();
+        }
+        destMachine.insert(job);
+    }
+
+    public static void readFromCommandLine(int machineNum, int policy, double speed, int jobNum, int roundType) {
         Simulator sim1 = new Simulator(machineNum);
         for (int i = 0; i < sim1.machines.length; i++) {
-            sim1.machines[i] = new Machine(i, policy);
+            sim1.machines[i] = new Machine(i, policy, speed);
         }
         sim1.addJobs2SimRand(jobNum);
         System.out.println(sim1.toString());
@@ -96,15 +140,15 @@ public class Simulator {
         sortAllJobs(lptOrSpt);
         boolean same = false;
         int rounds = 0;
-        while (!same && rounds < 10) {
+        while (!same) { // && rounds < 100
             same = runRound();
-            // System.out.println(this.toString());
             rounds++;
         }
-        if (rounds == 10 && !same) {
-            System.out.println("Sim ended after reachning stopping condition " + rounds + " rounds.");
-        } else
-            System.out.println("Sim reached stable state after " + rounds + " rounds.");
+        // if (rounds == 100 && !same) {
+        // System.out.println("Sim ended after reachning stopping condition " + rounds +
+        // " rounds.");
+        // } else
+        System.out.println("Sim reached stable state after " + rounds + " rounds.");
     }
 
     private void sortAllJobs(int lptOrSpt) {
@@ -130,11 +174,11 @@ public class Simulator {
             if (curMachine != bestMachine) {
                 this.move(iterator.current.job, bestMachine);
                 System.out.println("finished BRJ, moved to: " + iterator.current.job.runningMachine.ID
-                        + " <mach | time> " + iterator.current.job.completionTime);
+                        + " <mach | time> " + String.format("%.2f", iterator.current.job.completionTime));
                 same[iterator.current.job.getID()] = 0;
             } else {
                 System.out.println("finished BRJ, stayed at: " + iterator.current.job.runningMachine.ID
-                        + " <mach | time> " + iterator.current.job.completionTime);
+                        + " <mach | time> " + String.format("%.2f", iterator.current.job.completionTime));
                 same[iterator.current.job.getID()] = 1;
             }
             System.out.println();
@@ -153,17 +197,13 @@ public class Simulator {
     }
 
     public Machine bestResponseJob(Job job) {
-        // System.out.println("Started BRJ for job: " + job.getID());
         Machine fromMachine = job.runningMachine;
         int startIndex = fromMachine.jobList.indexOf(job);
         Machine toMachine = job.runningMachine;
-        int bestCompTime = job.completionTime;
+        double bestCompTime = job.completionTime;
         for (Machine machine : this.machines) {
             this.move(job, machine);
             if (job.completionTime < bestCompTime) {
-                // System.out
-                // .println("-----switched best to mach " + job.runningMachine.ID + " time " +
-                // job.completionTime);
                 bestCompTime = job.completionTime;
                 toMachine = job.runningMachine;
             }

@@ -6,17 +6,11 @@ public class Job {
      */
 
     int ID;
-    int processingTime;
-    int completionTime;
+    double processingTime;
+    double completionTime;
     Machine runningMachine;
 
-    // public Job(int ID, int processingTime, int completionTime) {
-    // this.ID = ID;
-    // this.processingTime = processingTime;
-    // this.completionTime = completionTime;
-    // }
-
-    public Job(int ID, int processingTime, Machine runningMachine) {
+    public Job(int ID, double processingTime, Machine runningMachine) {
         this.ID = ID;
         this.processingTime = processingTime;
         this.runningMachine = runningMachine;
@@ -24,7 +18,7 @@ public class Job {
         this.setCompletionTime();
     }
 
-    public int getProcessingTime() {
+    public double getProcessingTime() {
         return this.processingTime;
     }
 
@@ -41,14 +35,15 @@ public class Job {
             this.completionTime = processingTime;
         } else {
             ListIterator iterator = runningMachine.jobList.iterator();
-            int accCompletionTime = 0;
+            double accCompletionTime = 0;
+            double runningMachineSpeed = this.runningMachine.getSpeed();
             while (iterator.current != null) {
                 if (iterator.current.job == this)
                     break;
-                accCompletionTime += iterator.current.job.getProcessingTime();
+                accCompletionTime += (iterator.current.job.getProcessingTime() / runningMachineSpeed);
                 iterator.next();
             }
-            this.completionTime = accCompletionTime + this.processingTime;
+            this.completionTime = accCompletionTime + (this.processingTime / runningMachineSpeed);
         }
     }
 
@@ -62,7 +57,8 @@ public class Job {
     }
 
     public String toString2() {
-        return String.format("%1$22s", "{ Job " + this.ID + " PT: " + processingTime + " CT " + completionTime + " }");
+        return String.format("%1$22s", "{ Job " + this.ID + " PT: " + String.format("%.2f", processingTime) + " CT "
+                + String.format("%.2f", completionTime) + " }");
     }
 
     public String toString3() {
