@@ -5,13 +5,14 @@ public class Tester {
         int jobNum = Integer.parseInt(args[1]);
         int roundType = Integer.parseInt(args[2]);
         // testSort(machineNum, jobNum);
-        test1(machineNum, jobNum, roundType);
+        // test1(machineNum, jobNum, roundType);
+        testPriority();
 
     }
 
     public static void testSort(int machineNum, int jobNum) {
         Simulator sim1 = new Simulator(machineNum);
-        sim1.addJobs2Sim(jobNum);
+        // sim1.addJobs2Sim(jobNum);
         System.out.println(sim1.toString());
         // sim1.allJobs.sortReverse();
         // sim1.allJobs.sort();
@@ -28,6 +29,10 @@ public class Tester {
         // itr.current = itr.current.next;
         // }
         sim1.runSimulator(1);
+    }
+
+    public static void testPriority() {
+
     }
 
 }

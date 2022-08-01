@@ -2,10 +2,7 @@ public class Simulator {
     /**
      * Represents a simulator.
      * A Simulator has an array of machines, a chronoList (which is a list keeping
-     * all the
-     * machines in ascending order of their IDs) and a round (which is the
-     * order of iterating threw the jobs and asking them if hey want to change
-     * machines).
+     * all the machines in an ascending order of their IDs)
      */
     Machine[] machines;
     List allJobs;
@@ -17,15 +14,15 @@ public class Simulator {
 
     /*
      * The main function runs the simulator with different input types. input can be
-     * command line arguments number of machines, policy (same one for all
+     * command line arguments (number of machines, policy (same one for all
      * machines, number of jobs, round type) or a file in the format attached with
      * this source code. the file details the same parameters as in the command line
-     * arguments. in addition, the file contains of initial scheduling of the jobs
-     * onto the machines, and it is possible to dictate a different policy for each
+     * arguments. in addition the file contains of initial scheduling of the jobs
+     * onto the machines and it is possible to dectate a different policy for each
      * machine.
      * When invoked the simulator will run until reaching stable state
      * (Nash Equilibrium) or until reaching a predefined amount of rounds (currently
-     * set to maximum 10 rounds)
+     * set to maximum 100 rounds)
      */
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -33,13 +30,14 @@ public class Simulator {
         } else if (args.length == 1) {
             String fileName = args[0];
             readFromFile(fileName);
-        } else if (args.length == 4) {
+        } else if (args.length == 5) {
             int machineNum = Integer.parseInt(args[0]); // an int value between 1 - n
             int policy = Integer.parseInt(args[1]); // an int value between 0 - 3 (detailed policies' behavior are in
-                                                    // class Machine under insert function
-            int jobNum = Integer.parseInt(args[2]); // an int value between 1 - n
-            int roundType = Integer.parseInt(args[3]); // an int value 1 (for SPT) or 2 (LPT)
-            readFromCommandLine(machineNum, policy, jobNum, roundType);
+                                                    // class Machine under insert function)
+            double speed = Double.parseDouble(args[2]); // a double value larger than 0
+            int jobNum = Integer.parseInt(args[3]); // an int value between 1 - n
+            int roundType = Integer.parseInt(args[4]); // an int value 1 (for SPT) or 2 (LPT)
+            readFromCommandLine(machineNum, policy, speed, jobNum, roundType);
         } else {
             throw new IllegalArgumentException("too many arguments");
         }
@@ -47,36 +45,97 @@ public class Simulator {
 
     public static void readFromFile(String fileName) {
         StdIn.setInput(fileName);
-        int machineNum = StdIn.readInt();
-        Simulator sim1 = new Simulator(machineNum);
-        for (int i = 0; i < machineNum; i++) {
-            int policy = StdIn.readInt();
-            sim1.machines[i] = new Machine(i, policy);
-        }
-        int jobNum = StdIn.readInt();
-        sim1.addJobs2Sim(jobNum);
-        System.out.println(sim1.toString());
         int roundType = StdIn.readInt();
-        sim1.runSimulator(roundType);
+        int machineNum = StdIn.readInt();
+        int jobNum = StdIn.readInt();
+        Simulator sim = new Simulator(machineNum);
+        for (int i = 0; i < machineNum; i++) {
+            double speed = StdIn.readDouble();
+            int policy = StdIn.readInt();
+            if (policy == 4) {
+                int[] priorityList = new int[jobNum];
+                for (int j = 0; j < jobNum; j++) {
+                    priorityList[j] = StdIn.readInt();
+                }
+                sim.machines[i] = new Machine(i, policy, speed, priorityList);
+            } else {
+                sim.machines[i] = new Machine(i, policy, speed);
+            }
+        }
+        sim.checkValidity(jobNum);
+        sim.addJobs2Sim(jobNum, roundType);
+        System.out.println(sim.toString());
+        sim.runSimulator(roundType, fileName);
     }
 
-    public void addJobs2Sim(int numJobs) {
+    public void checkValidity(int jobNum) {
+        for (Machine machine : this.machines) {
+            machine.checkValidity();
+        }
+    }
+
+    public void addJobs2Sim(int numJobs, int roundType) {
+        Machine pseudoMachine = new Machine(-1, 0, 1);
+        double inf = Double.POSITIVE_INFINITY;
+        Job pseudoJob = new Job(-1, inf, pseudoMachine);
         for (int i = 0; i < numJobs; i++) {
-            int processingTime = StdIn.readInt();
-            int MachineID = StdIn.readInt();
-            Job newJob = new Job(i, processingTime, this.machines[MachineID]);
+            double processingTime = StdIn.readDouble();
+            Job newJob = new Job(i, processingTime, pseudoMachine);
             this.allJobs.addLast(newJob);
         }
+        initialSchedule(pseudoMachine, roundType);
     }
 
-    public static void readFromCommandLine(int machineNum, int policy, int jobNum, int roundType) {
-        Simulator sim1 = new Simulator(machineNum);
-        for (int i = 0; i < sim1.machines.length; i++) {
-            sim1.machines[i] = new Machine(i, policy);
+    public void initialSchedule(Machine pseudoMachine, int roundType) {
+        sortAllJobs(roundType);
+        ListIterator iterator = this.allJobs.iterator();
+        while (iterator.current != null) {
+            Machine curMachine = iterator.current.job.runningMachine;
+            Machine bestMachine = this.bestResponseJobInitial(iterator.current.job, pseudoMachine);
+            if (curMachine != bestMachine) {
+                this.moveIinitial(iterator.current.job, pseudoMachine, bestMachine);
+            }
+            iterator.next();
         }
-        sim1.addJobs2SimRand(jobNum);
-        System.out.println(sim1.toString());
-        sim1.runSimulator(roundType);
+        System.out.println();
+    }
+
+    public Machine bestResponseJobInitial(Job job, Machine pseudoMachine) {
+        int startIndex = pseudoMachine.jobList.indexOf(job);
+        Machine toMachine = pseudoMachine;
+        double bestCompTime = job.completionTime;
+        for (Machine machine : this.machines) {
+            this.moveIinitial(job, pseudoMachine, machine);
+            if (job.completionTime < bestCompTime) {
+                bestCompTime = job.completionTime;
+                toMachine = job.runningMachine;
+            }
+            job.runningMachine.remove(job);
+        }
+        pseudoMachine.jobList.add(startIndex, job);
+        job.setRunningMachine(pseudoMachine);
+        this.setCompletionTime();
+        return toMachine;
+    }
+
+    public void moveIinitial(Job job, Machine currentMachine, Machine destMachine) {
+        currentMachine.remove(job);
+        ListIterator iterator = currentMachine.jobList.iterator();
+        while (iterator.current != null) {
+            iterator.current.job.setCompletionTime();
+            iterator.next();
+        }
+        destMachine.insert(job);
+    }
+
+    public static void readFromCommandLine(int machineNum, int policy, double speed, int jobNum, int roundType) {
+        Simulator sim = new Simulator(machineNum);
+        for (int i = 0; i < sim.machines.length; i++) {
+            sim.machines[i] = new Machine(i, policy, speed);
+        }
+        sim.addJobs2SimRand(jobNum);
+        System.out.println(sim.toString());
+        sim.runSimulator(roundType);
     }
 
     public void addJobs2SimRand(int numJobs) {
@@ -89,22 +148,57 @@ public class Simulator {
     }
 
     /*
-     * runs the Simulator with the required round type (LPT/SPT), where SPT = 1 and
-     * LPT = 2
+     * runs the Simulaor FROM FILE with the required round type (LPT/SPT), where
+     * SPT=1 and LPT=2
+     */
+    public void runSimulator(int lptOrSpt, String fileName) {
+        sortAllJobs(lptOrSpt);
+        boolean same = false;
+        int rounds = 0;
+        while (!same && rounds < 100) {
+            same = runRound();
+            rounds++;
+        }
+        if (rounds == 100 && !same) {
+            System.out.println("Sim ended after reachning stopping condition " + rounds + " rounds.");
+        } else {
+            System.out.println("Sim reached stable state after " + rounds + " rounds.");
+            double optimum = optimum1();
+            double makeSpan = makeSpan();
+            double quality = makeSpan / optimum;
+            System.out.println("A lower bound for the minimal makespan is " + String.format("%.2f", optimum) + ".");
+            System.out.println("The current makespan is " + String.format("%.2f", makeSpan) + ".");
+            System.out.println("Scheduling quality is " + String.format("%.2f", quality) + ".");
+            // double optimum = optimum2(fileName);
+            // double sum = compTimeSum();
+            // double quality = sum / optimum;
+            // System.out.println(
+            // "Optimum sum of completion time is " + String.format("%.2f", optimum) + ".");
+            // System.out.println(
+            // "The current sum of completion time is " + String.format("%.2f", sum) + ".");
+            System.out.println();
+        }
+    }
+
+    /*
+     * runs the Simulaor FROM COMMAND LINE with the required round type (LPT/SPT),
+     * where SPT = 1 and LPT = 2
      */
     public void runSimulator(int lptOrSpt) {
         sortAllJobs(lptOrSpt);
         boolean same = false;
         int rounds = 0;
-        while (!same && rounds < 10) {
+        while (!same && rounds < 100) {
             same = runRound();
-            // System.out.println(this.toString());
             rounds++;
         }
-        if (rounds == 10 && !same) {
-            System.out.println("Sim ended after reaching stopping condition " + rounds + " rounds.");
-        } else
+        if (rounds == 100 && !same) {
+            System.out.println("Sim ended after reachning stopping condition " + rounds +
+                    " rounds.");
+        } else {
             System.out.println("Sim reached stable state after " + rounds + " rounds.");
+            System.out.println();
+        }
     }
 
     private void sortAllJobs(int lptOrSpt) {
@@ -130,11 +224,11 @@ public class Simulator {
             if (curMachine != bestMachine) {
                 this.move(iterator.current.job, bestMachine);
                 System.out.println("finished BRJ, moved to: " + iterator.current.job.runningMachine.ID
-                        + " <mach | time> " + iterator.current.job.completionTime);
+                        + " <mach | time> " + String.format("%.2f", iterator.current.job.completionTime));
                 same[iterator.current.job.getID()] = 0;
             } else {
                 System.out.println("finished BRJ, stayed at: " + iterator.current.job.runningMachine.ID
-                        + " <mach | time> " + iterator.current.job.completionTime);
+                        + " <mach | time> " + String.format("%.2f", iterator.current.job.completionTime));
                 same[iterator.current.job.getID()] = 1;
             }
             System.out.println();
@@ -153,17 +247,13 @@ public class Simulator {
     }
 
     public Machine bestResponseJob(Job job) {
-        // System.out.println("Started BRJ for job: " + job.getID());
         Machine fromMachine = job.runningMachine;
         int startIndex = fromMachine.jobList.indexOf(job);
         Machine toMachine = job.runningMachine;
-        int bestCompTime = job.completionTime;
+        double bestCompTime = job.completionTime;
         for (Machine machine : this.machines) {
             this.move(job, machine);
             if (job.completionTime < bestCompTime) {
-                // System.out
-                // .println("-----switched best to mach " + job.runningMachine.ID + " time " +
-                // job.completionTime);
                 bestCompTime = job.completionTime;
                 toMachine = job.runningMachine;
             }
@@ -190,6 +280,100 @@ public class Simulator {
         for (Machine machine : machines) {
             machine.setCompletionTime();
         }
+    }
+
+    /*
+     * computes a lower bound for the makespan. the makespan is the latest
+     * completion time of a job as suppose to all of the jobs on all of the machines
+     */
+    private double optimum1() {
+        double speedSum = speedSum();
+        double ProcessingTimeSum = ProcessingTimeSum();
+        return ProcessingTimeSum / speedSum;
+    }
+
+    private double speedSum() {
+        double sum = 0;
+        for (Machine machine : this.machines) {
+            double curSpeed = machine.getSpeed();
+            sum += curSpeed;
+        }
+        return sum;
+    }
+
+    private double ProcessingTimeSum() {
+        double sum = 0;
+        ListIterator iterator = this.allJobs.iterator();
+        while (iterator.current != null) {
+            sum += iterator.current.job.getProcessingTime();
+            iterator.current = iterator.current.next;
+        }
+        return sum;
+    }
+
+    /*
+     * computes the makespan after reaching stable state (NE)
+     */
+    public double makeSpan() {
+        double max = 0;
+        for (Machine machine : this.machines) {
+            double curMaxCompTime = machine.jobList.getLast().job.getcompletionTime();
+            if (curMaxCompTime > max) {
+                max = curMaxCompTime;
+            }
+        }
+        return max;
+    }
+
+    /*
+     * computes the sum of all completion times after initial scheduling of jobs
+     * onto the machines
+     */
+    public static double optimum2(String fileName) {
+        StdIn.setInput(fileName);
+        int roundType = StdIn.readInt();
+        int machineNum = StdIn.readInt();
+        int jobNum = StdIn.readInt();
+        Simulator optimalSim = new Simulator(machineNum);
+        for (int i = 0; i < machineNum; i++) {
+            double speed = StdIn.readDouble();
+            int policy = StdIn.readInt();
+            if (policy == 4) {
+                int[] priorityList = new int[jobNum];
+                for (int j = 0; j < jobNum; j++) {
+                    priorityList[j] = StdIn.readInt();
+                }
+                optimalSim.machines[i] = new Machine(i, policy, speed, priorityList);
+            } else {
+                optimalSim.machines[i] = new Machine(i, policy, speed);
+            }
+        }
+        optimalSim.addJobs2Sim(jobNum, 1);
+        double sum = 0;
+        for (Machine machine : optimalSim.machines) {
+            ListIterator itr = machine.jobList.iterator();
+            while (itr.current != null) {
+                sum += itr.current.job.getcompletionTime();
+                itr.current = itr.current.next;
+            }
+        }
+        return sum;
+    }
+
+    /*
+     * computes the sum of all completion times after reaching stable state (NE) of
+     * jobs onto the machines
+     */
+    private double compTimeSum() {
+        double sum = 0;
+        for (Machine machine : this.machines) {
+            ListIterator itr = machine.jobList.iterator();
+            while (itr.current != null) {
+                sum += itr.current.job.getcompletionTime();
+                itr.current = itr.current.next;
+            }
+        }
+        return sum;
     }
 
     public int checkFirstNull() {

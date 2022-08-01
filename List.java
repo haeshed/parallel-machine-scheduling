@@ -58,6 +58,10 @@ public class List {
         return first;
     }
 
+    public Node getLast() {
+        return last;
+    }
+
     /**
      * Gets the node located at the given index in this list.
      *
@@ -107,6 +111,17 @@ public class List {
         int iteratingIndex = 0;
         while (iteratingIndex < size) {
             if (getJob(iteratingIndex) == job) {
+                return iteratingIndex;
+            }
+            iteratingIndex++;
+        }
+        return -1;
+    }
+
+    public int indexOf(int ID) {
+        int iteratingIndex = 0;
+        while (iteratingIndex < size) {
+            if (getJob(iteratingIndex).getID() == ID) {
                 return iteratingIndex;
             }
             iteratingIndex++;

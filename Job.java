@@ -22,6 +22,10 @@ public class Job {
         return this.processingTime;
     }
 
+    public double getcompletionTime() {
+        return this.completionTime;
+    }
+
     public int getID() {
         return this.ID;
     }
@@ -31,12 +35,12 @@ public class Job {
     }
 
     public void setCompletionTime() {
+        double runningMachineSpeed = this.runningMachine.getSpeed();
         if (runningMachine.jobList.getSize() == 1) {
-            this.completionTime = processingTime;
+            this.completionTime = processingTime / runningMachineSpeed;
         } else {
             ListIterator iterator = runningMachine.jobList.iterator();
             double accCompletionTime = 0;
-            double runningMachineSpeed = this.runningMachine.getSpeed();
             while (iterator.current != null) {
                 if (iterator.current.job == this)
                     break;

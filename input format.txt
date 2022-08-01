@@ -1,15 +1,18 @@
 round type (an int value 1 (for SPT) or 2 (for LPT))
 machine number (an int value between 1 - n)
-machine 0 policy (an int value between 0 - 3) speed (a double value larger than 0)
-machine 1 policy (an int value between 0 - 3) speed (a double value larger than 0)
-.
-.
-.
-machine n-1 policy (an int value between 0 - 3) speed (a double value larger than 0)
 job number (an int value between 1 - n)
+speed (a double value larger than 0) machine 0 policy (an int value between 0 - 4) if policy is 4 - a priority list of job IDs
+speed (a double value larger than 0) machine 1 policy (an int value between 0 - 4) if policy is 4 - a priority list of job IDs
+.
+.
+.
+speed (a double value larger than 0) machine n-1 policy (an int value between 0 - 4) if policy is 4 - a priority list of job IDs
 job 0 processing time (a double value between 1 - 10)
 job 1 processing time (a double value between 1 - 10)
 .
 .
 .
 job n-1 processing time (a double value between 1 - 10)
+
+**Attention: for the speed value - it is imperative to write as double, for example 1.0 and not 1
+             This is the only diffence against a priority list that is not in the correct length

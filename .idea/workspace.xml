@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="toString4, removed round field, change func name">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="getMakespan, getOptimum, fixed timing completion times">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Job.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Job.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/List.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/ListIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/ListIterator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Machine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Machine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Simulator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/StdIn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/StdIn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Tester.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parallel-machine-scheduling/Tester.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +11,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="bargo" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -33,6 +27,13 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="main" />
+      </list>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -41,11 +42,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "settings.editor.selected.configurable": "configurable.group.editor"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Simulator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Simulator" />
@@ -181,6 +182,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
