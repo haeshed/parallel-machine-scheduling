@@ -2,7 +2,7 @@ public class Simulator {
     /**
      * Represents a simulator.
      * A Simulator has an array of machines, a chronoList (which is a list keeping
-     * all the machines in an ascending order of their IDs)
+     * all the machines in ascending order of their IDs)
      */
     Machine[] machines;
     List allJobs;
@@ -17,8 +17,8 @@ public class Simulator {
      * command line arguments (number of machines, policy (same one for all
      * machines, number of jobs, round type) or a file in the format attached with
      * this source code. the file details the same parameters as in the command line
-     * arguments. in addition the file contains of initial scheduling of the jobs
-     * onto the machines and it is possible to dectate a different policy for each
+     * arguments. in addition, the file contains of initial scheduling of the jobs
+     * onto the machines, and it is possible to dictate a different policy for each
      * machine.
      * When invoked the simulator will run until reaching stable state
      * (Nash Equilibrium) or until reaching a predefined amount of rounds (currently
@@ -93,7 +93,7 @@ public class Simulator {
             Machine curMachine = iterator.current.job.runningMachine;
             Machine bestMachine = this.bestResponseJobInitial(iterator.current.job, pseudoMachine);
             if (curMachine != bestMachine) {
-                this.moveIinitial(iterator.current.job, pseudoMachine, bestMachine);
+                this.moveInitial(iterator.current.job, pseudoMachine, bestMachine);
             }
             iterator.next();
         }
@@ -105,7 +105,7 @@ public class Simulator {
         Machine toMachine = pseudoMachine;
         double bestCompTime = job.completionTime;
         for (Machine machine : this.machines) {
-            this.moveIinitial(job, pseudoMachine, machine);
+            this.moveInitial(job, pseudoMachine, machine);
             if (job.completionTime < bestCompTime) {
                 bestCompTime = job.completionTime;
                 toMachine = job.runningMachine;
@@ -118,7 +118,7 @@ public class Simulator {
         return toMachine;
     }
 
-    public void moveIinitial(Job job, Machine currentMachine, Machine destMachine) {
+    public void moveInitial(Job job, Machine currentMachine, Machine destMachine) {
         currentMachine.remove(job);
         ListIterator iterator = currentMachine.jobList.iterator();
         while (iterator.current != null) {
@@ -148,7 +148,7 @@ public class Simulator {
     }
 
     /*
-     * runs the Simulaor FROM FILE with the required round type (LPT/SPT), where
+     * runs the Simulator FROM FILE with the required round type (LPT/SPT), where
      * SPT=1 and LPT=2
      */
     public void runSimulator(int lptOrSpt, String fileName) {
@@ -160,7 +160,7 @@ public class Simulator {
             rounds++;
         }
         if (rounds == 100 && !same) {
-            System.out.println("Sim ended after reachning stopping condition " + rounds + " rounds.");
+            System.out.println("Sim ended after reaching stopping condition " + rounds + " rounds.");
         } else {
             System.out.println("Sim reached stable state after " + rounds + " rounds.");
             double optimum = optimum1();
@@ -181,7 +181,7 @@ public class Simulator {
     }
 
     /*
-     * runs the Simulaor FROM COMMAND LINE with the required round type (LPT/SPT),
+     * runs the Simulator FROM COMMAND LINE with the required round type (LPT/SPT),
      * where SPT = 1 and LPT = 2
      */
     public void runSimulator(int lptOrSpt) {
@@ -193,7 +193,7 @@ public class Simulator {
             rounds++;
         }
         if (rounds == 100 && !same) {
-            System.out.println("Sim ended after reachning stopping condition " + rounds +
+            System.out.println("Sim ended after reaching stopping condition " + rounds +
                     " rounds.");
         } else {
             System.out.println("Sim reached stable state after " + rounds + " rounds.");
@@ -214,9 +214,6 @@ public class Simulator {
     private boolean runRound() {
         ListIterator iterator = this.allJobs.iterator();
         int[] same = new int[this.allJobs.getSize()];
-        for (int i = 0; i < same.length; i++) {
-            same[i] = 0;
-        }
         while (iterator.current != null) {
             System.out.println("Started BRJ for job: " + iterator.current.job.getID());
             Machine curMachine = iterator.current.job.runningMachine;
@@ -284,7 +281,7 @@ public class Simulator {
 
     /*
      * computes a lower bound for the makespan. the makespan is the latest
-     * completion time of a job as suppose to all of the jobs on all of the machines
+     * completion time of a job as suppose to all the jobs on all the machines
      */
     private double optimum1() {
         double speedSum = speedSum();

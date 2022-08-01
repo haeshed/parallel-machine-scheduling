@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="getMakespan, getOptimum, fixed timing completion times">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Simulator.java" afterDir="false" />
-    </list>
+    <list default="true" id="34838deb-ef03-4eca-b7a3-9f67ecf18745" name="Changes" comment="bargo2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -177,7 +174,28 @@
       <option name="project" value="LOCAL" />
       <updated>1654104650080</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="bargo2">
+      <created>1659334720732</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1659334720732</updated>
+    </task>
+    <task id="LOCAL-00016" summary="bargo2">
+      <created>1659334756233</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1659334756233</updated>
+    </task>
+    <task id="LOCAL-00017" summary="bargo2">
+      <created>1659334878688</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1659334878688</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,7 +239,8 @@
     <MESSAGE value="fixed add last, fixed build simulator" />
     <MESSAGE value="order of simulator func" />
     <MESSAGE value="toString4, removed round field, change func name" />
-    <option name="LAST_COMMIT_MESSAGE" value="toString4, removed round field, change func name" />
+    <MESSAGE value="bargo2" />
+    <option name="LAST_COMMIT_MESSAGE" value="bargo2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
