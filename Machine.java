@@ -6,23 +6,29 @@ public class Machine {
      */
 
     int ID;
-    int CompletionTime;
+    double CompletionTime;
     List jobList;
     int policy;
+    double speed;
 
-    public Machine(int ID, int policy) {
+    public Machine(int ID, int policy, double speed) {
         this.ID = ID;
         this.CompletionTime = 0;
         this.jobList = new List();
         this.policy = policy;
+        this.speed = speed;
     }
 
-    public int getCompletionTime() {
+    public double getCompletionTime() {
         return this.CompletionTime;
     }
 
     public int getPolicy() {
         return this.policy;
+    }
+
+    public double getSpeed() {
+        return this.speed;
     }
 
     public Job getJob(int index) {
