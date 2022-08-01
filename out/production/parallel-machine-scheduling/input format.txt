@@ -1,0 +1,15 @@
+round type (an int value 1 (for SPT) or 2 (for LPT))
+machine amount (an int value between 1 - n)
+machine 0 policy (an int value between 0 - 3) speed (a double value larger than 0) [0 = end of the line, policy 1 = beginning of the line, policy 2 = small to large, policy 3 = large to small
+machine 1 policy (an int value between 0 - 3) speed (a double value larger than 0)
+.
+.
+.
+machine n-1 policy (an int value between 0 - 3) speed (a double value larger than 0)
+job number (an int value between 1 - n)
+job 0 processing time (a double value between 1 - 10)
+job 1 processing time (a double value between 1 - 10)
+.
+.
+.
+job n-1 processing time (a double value between 1 - 10)
